@@ -2,7 +2,7 @@ import React from "react";
 import { IPropsInput } from "../../modals/modals";
 
 export const Input = (props: IPropsInput): React.JSX.Element => {
-  const { name, text, value, onChange } = props;
+  const { name, text, value, onChange, pattern } = props;
 
   return (
     <label className='form-label'>
@@ -13,6 +13,8 @@ export const Input = (props: IPropsInput): React.JSX.Element => {
         name={name}
         value={value} 
         onChange={onChange}
+        required
+        pattern={pattern}
       />
     </label>
   );

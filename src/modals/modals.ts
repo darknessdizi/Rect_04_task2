@@ -27,6 +27,7 @@ export interface IPropsInput {
   text: string,
   value: string,
   onChange: any,
+  pattern: string,
 }
 
 export interface $elements {
