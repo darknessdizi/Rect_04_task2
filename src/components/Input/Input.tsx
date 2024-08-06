@@ -15,6 +15,7 @@ export const Input = (props: IPropsInput): React.JSX.Element => {
         onChange={onChange}
         required
         pattern={pattern}
+        placeholder = {(name === "path") ? "5.8" : ""}
       />
     </label>
   );

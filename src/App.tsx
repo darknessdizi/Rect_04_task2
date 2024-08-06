@@ -2,7 +2,36 @@ import './App.css';
 import React, { useState } from 'react';
 import { Form } from './components/Form/Form';
 import { Table } from './components/Table/Table';
-import { $elements, IFormData } from './modals/modals';
+import { $elements, IData, IFormData } from './modals/modals';
+
+function sortArray(a: IData, b: IData): number {
+  // Сортировка списка по дате
+  const res1 = a.date.split('.').reverse().join('.');
+  const res2 = b.date.split('.').reverse().join('.');
+
+  const d1 = new Date(res1);
+  const d2 = new Date(res2);
+  console.log('d1=', res1, 'd2=', res2)
+  let result: number = 0;
+  if (d1 > d2) result = 1; // d1 позже d2 (надо менять)
+  if (d1 === d2) result = 0;
+  if (d1 < d2) result = -1;
+  console.log('result', result)
+  return result;
+}
+
+function addZero(str: string): string {
+  // делает число двухзначным
+  let array = str.split('.');
+  array = array.map((item) => {
+    if (Number(item) < 10) {
+      return `0${Number(item)}`;
+    }
+    return item;
+  });
+  const result = array.join('.');
+  return result;
+}
 
 function App(): React.JSX.Element {
   const [formData, setFormData] = useState<IFormData>({
@@ -16,13 +45,14 @@ function App(): React.JSX.Element {
     const form = event.target as HTMLFormElement;
     const { date, path }: $elements = form.elements as any;
 
+
     const newData = {
-      date: date.value,
+      date: addZero(date.value),
       path: path.value,
     }
 
     const index = formData.array.findIndex((item) => {
-      return item.date === date.value
+      return item.date === addZero(date.value);
     });
 
     console.log('index', index);
@@ -36,7 +66,7 @@ function App(): React.JSX.Element {
     if (index === -1) {
       setFormData((prevForm) => ({
         ...prevForm,
-        ['array']: [...prevForm.array, newData],
+        ['array']: [...prevForm.array, newData].sort(sortArray),
       }));
     } else {
       setFormData((prevForm) => {
