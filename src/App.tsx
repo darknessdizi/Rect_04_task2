@@ -59,10 +59,23 @@ function App(): React.JSX.Element {
     }));
   }
 
+  const onClick =(e: React.ClipboardEvent<HTMLTableElement>) => {
+    const element = e.target as HTMLElement;
+    if (element.className === 'controll-delete') {
+      // Удаление строки таблицы с данными (нажатие на крестик)
+      const parent = element.closest('.table-item');
+      const item = parent?.querySelector('.item-date');
+      setFormData((prevForm) => ({
+        ...prevForm,
+        ['array']: [...prevForm.array].filter((el) => el.date !== item?.textContent),
+      }));
+    }
+  }
+
   return (
     <div className='conteiner'>
       <Form date={formData.date} path={formData.path} change={onChange} submit={onSubmit} />
-      <Table array={formData.array} /> 
+      <Table array={formData.array} click={onClick} /> 
     </div>
   )
 }

@@ -4,8 +4,8 @@ export const RowTable = (props: IData): React.JSX.Element => {
   const { date, path } = props;
 
   return (
-    <tr>
-      <td>{date}</td>
+    <tr className="table-item">
+      <td className="item-date">{date}</td>
       <td>{path}</td>
       <td className='row-controll'>
         <div className="controll-editor"></div>

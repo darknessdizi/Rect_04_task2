@@ -12,7 +12,8 @@ export interface IFormData {
 export type DataTable = IData[];
 
 export interface IPropsTable {
-  array: DataTable
+  array: DataTable,
+  click: any,
 }
 
 export interface IPropsForm {

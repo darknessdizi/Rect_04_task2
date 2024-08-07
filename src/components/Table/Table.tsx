@@ -1,11 +1,12 @@
 import { IPropsTable } from "../../modals/modals";
 import { RowTable } from '../RowTable/RowTable';
+import { v4 as uuidv4 } from 'uuid';
 
 export const Table = (props: IPropsTable): React.JSX.Element => {
-  const { array } = props;
+  const { array, click } = props;
 
   return (
-    <div className='conteiner-table'>
+    <div className='conteiner-table' onClick={click}>
       <table className='table'>
         <thead>
           <tr>
@@ -17,12 +18,12 @@ export const Table = (props: IPropsTable): React.JSX.Element => {
           
         <tbody>
           {
-            array.map((obj, index) => {
-              return <RowTable date={obj.date} path={obj.path} key={index} />
+            array.map((obj) => {
+              return <RowTable date={obj.date} path={obj.path} key={uuidv4()} />
             })
           }   
         </tbody>
-          
+        
       </table>
     </div>
   );
