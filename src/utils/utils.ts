@@ -14,7 +14,7 @@ export function sortArray(a: IData, b: IData): number {
 
 function _getDate(str: string): Date {
   // Возвращает дату по значению строки
-  let array = str.split('.').reverse();
+  const array = str.split('.').reverse();
 
   const curentTime = new Date();
   const year = String(curentTime.getFullYear()).slice(2);
@@ -25,7 +25,7 @@ function _getDate(str: string): Date {
     array[0] = `19${array[0]}`;
   }
 
-  let result = array.join('.');
+  const result = array.join('.');
   const date = new Date(result);
 
   return date;

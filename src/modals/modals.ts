@@ -1,14 +1,14 @@
 export interface IData {
   date: string,
   path: string,
-};
+}
 
 export interface IFormData {
   date: string,
   path: string,
   array: IData[],
   statusEditor: boolean,
-};
+}
 
 export type DataTable = IData[];
 
@@ -35,4 +35,4 @@ export interface IPropsInput {
 export interface IElements {
   date: HTMLInputElement,
   path: HTMLInputElement,
-};
+}
