@@ -2,21 +2,8 @@ import './App.css';
 import { useState } from 'react';
 import { Form } from './components/Form/Form';
 import { Table } from './components/Table/Table';
-import { $elements, IFormData } from './modals/modals';
-import { sortArray } from './utils/utils';
-
-function addZero(str: string): string {
-  // делает число двухзначным
-  let array = str.split('.');
-  array = array.map((item) => {
-    if (Number(item) < 10) {
-      return `0${Number(item)}`;
-    }
-    return item;
-  });
-  const result = array.join('.');
-  return result;
-}
+import { IElements, IFormData } from './modals/modals';
+import { sortArray, addZero } from './utils/utils';
 
 function App(): React.JSX.Element {
   const [formData, setFormData] = useState<IFormData>({
@@ -26,10 +13,10 @@ function App(): React.JSX.Element {
   });
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // Событие submit для формы (нажатие кнопки ОК)
     event.preventDefault();
     const form = event.target as HTMLFormElement;
-    const { date, path }: $elements = form.elements as any;
-
+    const { date, path }: IElements = form.elements as any;
 
     const newData = {
       date: addZero(date.value),
@@ -39,8 +26,6 @@ function App(): React.JSX.Element {
     const index = formData.array.findIndex((item) => {
       return item.date === addZero(date.value);
     });
-
-    console.log('index', index);
 
     setFormData((prevForm) => ({
       ...prevForm, // открываем для сохранения предыдущее состояние нашей формы
@@ -63,12 +48,10 @@ function App(): React.JSX.Element {
         }
       });
     }
-
-    console.log('date:', date.value, 'path:', path.value)
-    console.log('formData:', formData)
   }
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Событие изменения значения в поле input
     const { name, value } = e.target;
     setFormData((prevForm) => ({
       ...prevForm,

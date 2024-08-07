@@ -30,7 +30,7 @@ export interface IPropsInput {
   pattern: string,
 }
 
-export interface $elements {
+export interface IElements {
   date: HTMLInputElement,
   path: HTMLInputElement,
 };

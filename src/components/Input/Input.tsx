@@ -1,4 +1,3 @@
-import React from "react";
 import { IPropsInput } from "../../modals/modals";
 
 export const Input = (props: IPropsInput): React.JSX.Element => {

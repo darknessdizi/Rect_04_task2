@@ -1,4 +1,3 @@
-import React from "react";
 import { IPropsForm } from "../../modals/modals";
 import { Input } from "../Input/Input";
 

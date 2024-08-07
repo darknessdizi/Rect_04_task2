@@ -1,4 +1,3 @@
-import React from "react";
 import { IData } from "../../modals/modals";
 
 export const RowTable = (props: IData): React.JSX.Element => {
