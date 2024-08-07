@@ -1,24 +1,9 @@
 import './App.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form } from './components/Form/Form';
 import { Table } from './components/Table/Table';
-import { $elements, IData, IFormData } from './modals/modals';
-
-function sortArray(a: IData, b: IData): number {
-  // Сортировка списка по дате
-  const res1 = a.date.split('.').reverse().join('.');
-  const res2 = b.date.split('.').reverse().join('.');
-
-  const d1 = new Date(res1);
-  const d2 = new Date(res2);
-  console.log('d1=', res1, 'd2=', res2)
-  let result: number = 0;
-  if (d1 > d2) result = 1; // d1 позже d2 (надо менять)
-  if (d1 === d2) result = 0;
-  if (d1 < d2) result = -1;
-  console.log('result', result)
-  return result;
-}
+import { $elements, IFormData } from './modals/modals';
+import { sortArray } from './utils/utils';
 
 function addZero(str: string): string {
   // делает число двухзначным
