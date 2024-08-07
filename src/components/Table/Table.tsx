@@ -2,7 +2,7 @@ import { IPropsTable } from "../../modals/modals";
 import { RowTable } from '../RowTable/RowTable';
 import { v4 as uuidv4 } from 'uuid';
 
-export const Table = (props: IPropsTable): React.JSX.Element => {
+export const Table = (props: IPropsTable) => {
   const { array, click } = props;
 
   return (
@@ -23,7 +23,7 @@ export const Table = (props: IPropsTable): React.JSX.Element => {
             })
           }   
         </tbody>
-        
+
       </table>
     </div>
   );

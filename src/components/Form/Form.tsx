@@ -1,7 +1,7 @@
 import { IPropsForm } from "../../modals/modals";
 import { Input } from "../Input/Input";
 
-export const Form = (props: IPropsForm): React.JSX.Element => {
+export const Form = (props: IPropsForm) => {
   const { date, path, submit, change } = props;
 
   return (

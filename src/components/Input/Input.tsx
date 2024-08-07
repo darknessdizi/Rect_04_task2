@@ -1,6 +1,6 @@
 import { IPropsInput } from "../../modals/modals";
 
-export const Input = (props: IPropsInput): React.JSX.Element => {
+export const Input = (props: IPropsInput) => {
   const { name, text, value, onChange, pattern } = props;
 
   return (

@@ -4,9 +4,10 @@ export interface IData {
 };
 
 export interface IFormData {
-  date: string,
-  path: string,
+  date: string | null | undefined,
+  path: string | null | undefined,
   array: IData[],
+  statusEditor: boolean,
 };
 
 export type DataTable = IData[];

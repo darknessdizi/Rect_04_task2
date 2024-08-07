@@ -5,11 +5,12 @@ import { Table } from './components/Table/Table';
 import { IElements, IFormData } from './modals/modals';
 import { sortArray, addZero } from './utils/utils';
 
-function App(): React.JSX.Element {
+function App() {
   const [formData, setFormData] = useState<IFormData>({
     date: '',
     path: '',
     array: [],
+    statusEditor: false,
   });
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -31,22 +32,37 @@ function App(): React.JSX.Element {
       ...prevForm, // открываем для сохранения предыдущее состояние нашей формы
       ['date']: '',
       ['path']: '',
+      statusEditor: false,
     }));
 
     if (index === -1) {
       setFormData((prevForm) => ({
+        // Добавляем новую строку с данными
         ...prevForm,
         ['array']: [...prevForm.array, newData].sort(sortArray),
       }));
     } else {
-      setFormData((prevForm) => {
-        const newArray = prevForm.array.slice();
-        newArray[index].path = String(Number(newArray[index].path) + Number(path.value));
-        return {
-          ...prevForm,
-          ['array']: [...newArray],
-        }
-      });
+      if (formData.statusEditor) {
+        // Редактируем строку с данными
+        setFormData((prevForm) => {
+          const newArray = prevForm.array.slice();
+          newArray[index].path = path.value;
+          return {
+            ...prevForm,
+            ['array']: [...newArray],
+          }
+        });
+      } else {
+        // Добавляем данные в строку с данными
+        setFormData((prevForm) => {
+          const newArray = prevForm.array.slice();
+          newArray[index].path = String(Number(newArray[index].path) + Number(path.value));
+          return {
+            ...prevForm,
+            ['array']: [...newArray],
+          }
+        });
+      }
     }
   }
 
@@ -64,11 +80,24 @@ function App(): React.JSX.Element {
     if (element.className === 'controll-delete') {
       // Удаление строки таблицы с данными (нажатие на крестик)
       const parent = element.closest('.table-item');
-      const item = parent?.querySelector('.item-date');
+      const itemDate = parent?.querySelector('.item-date');
       setFormData((prevForm) => ({
         ...prevForm,
-        ['array']: [...prevForm.array].filter((el) => el.date !== item?.textContent),
+        ['array']: [...prevForm.array].filter((el) => el.date !== itemDate?.textContent),
       }));
+    }
+    if (element.className === 'controll-editor') {
+      const parent = element.closest('.table-item');
+      const itemDate = parent?.querySelector('.item-date')?.textContent;
+      const itemPath = parent?.querySelector('.item-path')?.textContent;
+      if (itemDate) {
+        setFormData((prevForm) => ({
+          ...prevForm,
+          ['date']: itemDate,
+          ['path']: itemPath,
+          statusEditor: true,
+        }));
+      }
     }
   }
 
