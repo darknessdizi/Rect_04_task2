@@ -87,14 +87,17 @@ function App() {
       }));
     }
     if (element.className === 'controll-editor') {
+      // Редактирование строки с данными (нажатие кнопки редактировать)
       const parent = element.closest('.table-item');
       const itemDate = parent?.querySelector('.item-date')?.textContent;
       const itemPath = parent?.querySelector('.item-path')?.textContent;
-      if (itemDate) {
+      if ((typeof itemDate === 'string') && (typeof itemPath === 'string')){
+        const textDate: string = itemDate;
+        const textPath: string = itemPath;
         setFormData((prevForm) => ({
           ...prevForm,
-          ['date']: itemDate,
-          ['path']: itemPath,
+          ['date']: textDate,
+          ['path']: textPath,
           statusEditor: true,
         }));
       }

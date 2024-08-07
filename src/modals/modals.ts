@@ -4,8 +4,8 @@ export interface IData {
 };
 
 export interface IFormData {
-  date: string | null | undefined,
-  path: string | null | undefined,
+  date: string,
+  path: string,
   array: IData[],
   statusEditor: boolean,
 };
